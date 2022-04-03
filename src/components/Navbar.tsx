@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { Flex, Spacer } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { BsFacebook, BsWhatsapp, BsEnvelope } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const navLinks = [
   { href: "/", name: "Home" },
@@ -12,6 +13,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   return (
     <Flex as="header" h="68px" alignItems="center" px={6}>
       {/* <Image src={} /> alt="Cacv logo" */}
@@ -21,7 +23,7 @@ export default function Navbar() {
         {navLinks.map((link) => (
           <li key={link.href}>
             <NextLink href={link.href} passHref>
-              <Link>{link.name}</Link>
+              <Link _hover={{ transition: 2, opacity: 0.7 }}>{link.name}</Link>
             </NextLink>
           </li>
         ))}
