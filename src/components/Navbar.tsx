@@ -12,6 +12,12 @@ const navLinks = [
   { href: "/galeria", name: "Galeria" },
 ];
 
+const socialMediaLinks = [
+  { icon: <BsFacebook />, href: "https://facebook.com" },
+  { icon: <BsWhatsapp />, href: "https://api.whatsapp.com" },
+  { icon: <BsEnvelope />, href: "mailto:victor@gmail.com" },
+];
+
 export default function Navbar() {
   const router = useRouter();
   return (
@@ -30,9 +36,11 @@ export default function Navbar() {
       </Flex>
       <Spacer />
       <Flex gap={6}>
-        <BsFacebook />
-        <BsWhatsapp />
-        <BsEnvelope />
+        {socialMediaLinks.map((link) => (
+          <Link href={link.href} key={link.href}>
+            {link.icon}
+          </Link>
+        ))}
       </Flex>
     </Flex>
   );
