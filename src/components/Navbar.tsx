@@ -19,9 +19,18 @@ const socialMediaLinks = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
+  const { pathname } = useRouter();
+
   return (
-    <Flex as="header" h="68px" alignItems="center" px={6}>
+    <Flex
+      as="header"
+      w="100%"
+      h="68px"
+      top={0}
+      alignItems="center"
+      px={6}
+      position="fixed"
+    >
       {/* <Image src={} /> alt="Cacv logo" */}
       <span>Logo</span>
       <Spacer />
@@ -29,7 +38,14 @@ export default function Navbar() {
         {navLinks.map((link) => (
           <li key={link.href}>
             <NextLink href={link.href} passHref>
-              <Link _hover={{ transition: 2, opacity: 0.7 }}>{link.name}</Link>
+              <Link
+                pb={2}
+                borderColor="gray.600"
+                borderBottom={pathname === link.href ? "2px" : "0px"}
+                _hover={{ transition: 2, opacity: 0.7 }}
+              >
+                {link.name}
+              </Link>
             </NextLink>
           </li>
         ))}
@@ -37,7 +53,7 @@ export default function Navbar() {
       <Spacer />
       <Flex gap={6}>
         {socialMediaLinks.map((link) => (
-          <Link href={link.href} key={link.href}>
+          <Link href={link.href} key={link.href} isExternal>
             {link.icon}
           </Link>
         ))}
