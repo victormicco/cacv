@@ -4,7 +4,7 @@ import Layout from "components/Layout";
 
 export default function Courses() {
   return (
-    <Layout>
+    <Layout title="Cursos">
       <Heading as="h1" size="lg" fontWeight="semibold" px={6}>
         Nossos cursos
       </Heading>

@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 
 export default function Footer() {
   return (
@@ -11,7 +11,16 @@ export default function Footer() {
       py={8}
     >
       <Text>Copyright ©2022 | Todos os direitos reservados</Text>
-      <Text>Developed by Fellipe Utaka and Victor Araujo</Text>
+      <Text>
+        Developed by{" "}
+        <Link href="https://github.com/fellipeutaka" isExternal>
+          Fellipe Utaka
+        </Link>{" "}
+        and{" "}
+        <Link href="https://github.com/victormicco" isExternal>
+          Victor Araujo
+        </Link>
+      </Text>
     </Flex>
   );
 }

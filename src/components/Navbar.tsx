@@ -1,8 +1,20 @@
 import Image from "next/image";
 import NextLink from "next/link";
-import { Flex, Spacer, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { BsFacebook, BsWhatsapp, BsEnvelope } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { useRouter } from "next/router";
 
 const navLinks = [
@@ -13,9 +25,13 @@ const navLinks = [
 ];
 
 const socialMediaLinks = [
-  { icon: <BsFacebook />, href: "https://facebook.com" },
-  { icon: <BsWhatsapp />, href: "https://api.whatsapp.com" },
-  { icon: <BsEnvelope />, href: "mailto:victor@gmail.com" },
+  {
+    icon: <BsFacebook />,
+    href: "https://www.facebook.com/cacv.cultivandoamor",
+    text: "Facebook",
+  },
+  { icon: <BsWhatsapp />, href: "https://api.whatsapp.com", text: "Whatsapp" },
+  { icon: <BsEnvelope />, href: "mailto:cacv@cacv.org.br", text: "E-mail" },
 ];
 
 export default function Navbar() {
@@ -27,6 +43,7 @@ export default function Navbar() {
       w="100%"
       h="68px"
       top={0}
+      justifyContent="space-between"
       alignItems="center"
       px={6}
       position="fixed"
@@ -36,8 +53,13 @@ export default function Navbar() {
     >
       {/* <Image src={} /> alt="Cacv logo" */}
       <span>Logo</span>
-      <Spacer />
-      <Flex as="ul" listStyleType="none" gap={6}>
+      <Stack
+        as="ul"
+        listStyleType="none"
+        gap={6}
+        display={{ base: "none", md: "flex" }}
+        direction={{ base: "column", md: "row" }}
+      >
         {navLinks.map((link) => (
           <li key={link.href}>
             <NextLink href={link.href} passHref>
@@ -52,15 +74,45 @@ export default function Navbar() {
             </NextLink>
           </li>
         ))}
-      </Flex>
-      <Spacer />
-      <Flex gap={6}>
+      </Stack>
+      <Stack
+        as="ul"
+        listStyleType="none"
+        display={{ base: "none", md: "flex" }}
+        direction={{ base: "column", md: "row" }}
+        gap={6}
+      >
         {socialMediaLinks.map((link) => (
-          <Link href={link.href} key={link.href} isExternal>
-            {link.icon}
-          </Link>
+          <li key={link.href}>
+            <Link href={link.href} key={link.href} isExternal>
+              {link.icon}
+            </Link>
+          </li>
         ))}
-      </Flex>
+      </Stack>
+      <Box ml={2} display={{ base: "inline-block", md: "none" }}>
+        <Menu isLazy>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<GiHamburgerMenu />}
+            variant="outline"
+          />
+          <MenuList>
+            {navLinks.map((link) => (
+              <NextLink key={link.href} href={link.href} passHref>
+                <MenuItem as={Link}>{link.name}</MenuItem>
+              </NextLink>
+            ))}
+            {socialMediaLinks.map((link) => (
+              <MenuItem as={Link} key={link.href} href={link.href}>
+                {link.icon}
+                <Text ml={1}>{link.text}</Text>
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+      </Box>
     </Flex>
   );
 }
