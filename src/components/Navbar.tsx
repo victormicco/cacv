@@ -101,7 +101,7 @@ export default function Navbar() {
             variant="outline"
           />
           <MenuList>
-            <MenuGroup title="Pages">
+            <MenuGroup title="Páginas">
               {navLinks.map((link) => (
                 <NextLink key={link.href} href={link.href} passHref>
                   <MenuItem as={Link}>{link.name}</MenuItem>
@@ -109,7 +109,7 @@ export default function Navbar() {
               ))}
             </MenuGroup>
             <MenuDivider />
-            <MenuGroup title="Social Media">
+            <MenuGroup title="Redes sociais">
               {socialMediaLinks.map((link) => (
                 <MenuItem
                   as={Link}

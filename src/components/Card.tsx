@@ -8,9 +8,10 @@ const MotionSection = motion<BoxProps>(Box);
 type CardProps = {
   title: string;
   description: string;
+  imageUrl: string;
 };
 
-export default function Card({ title, description }: CardProps) {
+export default function Card({ title, description, imageUrl }: CardProps) {
   const [ref, inView] = useInView();
   const controls = useAnimation();
   if (inView) {
@@ -35,7 +36,7 @@ export default function Card({ title, description }: CardProps) {
       ref={ref}
     >
       <Image
-        src="/informatica.jpg"
+        src={imageUrl}
         width="286px"
         height="214.5px"
         alt={title}
