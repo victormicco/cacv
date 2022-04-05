@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { BsFacebook, BsWhatsapp, BsEnvelope } from "react-icons/bs";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { CgMenu } from "react-icons/cg";
 import { useRouter } from "next/router";
 
 const navLinks = [
@@ -97,7 +97,7 @@ export default function Navbar() {
           <MenuButton
             as={IconButton}
             aria-label="Options"
-            icon={<GiHamburgerMenu />}
+            icon={<CgMenu />}
             variant="outline"
           />
           <MenuList>
