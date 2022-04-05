@@ -1,5 +1,8 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import { Box, BoxProps, Heading, Text } from "@chakra-ui/react";
+import { motion, useAnimation } from "framer-motion";
+
+const MotionSection = motion<BoxProps>(Box);
 
 type CardProps = {
   title: string;
@@ -7,8 +10,25 @@ type CardProps = {
 };
 
 export default function Card({ title, description }: CardProps) {
+  const controls = useAnimation();
+  controls.start("visible");
+
+  const sectionVariants = {
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.5 } },
+    hidden: { y: 10, opacity: 0 },
+  };
+
   return (
-    <Box w="286px" bgColor="gray.600" borderRadius="3xl" p={5}>
+    <MotionSection
+      as="section"
+      w="286px"
+      bgColor="gray.600"
+      borderRadius="3xl"
+      p={5}
+      animate={controls}
+      initial="hidden"
+      variants={sectionVariants}
+    >
       <Image
         src="/informatica.jpg"
         width="286px"
@@ -16,8 +36,10 @@ export default function Card({ title, description }: CardProps) {
         alt={title}
         style={{ borderRadius: 12 }}
       />
-      <Heading size="md">{title}</Heading>
-      <Text>{description}</Text>
-    </Box>
+      <Heading size="md" lineHeight="8">
+        {title}
+      </Heading>
+      <Text lineHeight="5">{description}</Text>
+    </MotionSection>
   );
 }
