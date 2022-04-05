@@ -31,6 +31,7 @@ export default function Home() {
           quality={100}
           style={{ borderRadius: 8 }}
           alt="Jovens"
+          priority
         />
       </Flex>
       <Flex
