@@ -132,16 +132,18 @@ export default function Home() {
           gap={4}
           justifyContent="center"
         >
-          <iframe
-            width="495.04"
-            height="278.46"
-            style={{ borderRadius: 8 }}
-            src="https://www.youtube-nocookie.com/embed/RDKe9ODRt4E"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <Box w="100%" maxW="495.04px" height="278.46px">
+            <iframe
+              width="100%"
+              height="100%"
+              style={{ borderRadius: 8 }}
+              src="https://www.youtube-nocookie.com/embed/RDKe9ODRt4E"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </Box>
           <Box maxW={["100%", "30%"]}>
             <Heading size="lg">Ajude sem tirar 1 real do bolso</Heading>
             <Text my={2}>
