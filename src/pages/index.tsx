@@ -2,6 +2,8 @@ import { Box, Flex, Heading, Text, Link } from "@chakra-ui/react";
 import Image from "next/image";
 import NextLink from "next/link";
 import Layout from "./../components/Layout";
+import loadable from "@loadable/component";
+const YouTubeIframe = loadable(() => import("components/Iframe"));
 
 export default function Home() {
   return (
@@ -133,17 +135,7 @@ export default function Home() {
           justifyContent="center"
         >
           <Box w="100%" maxW="495.04px" height="278.46px">
-            <iframe
-              loading="lazy"
-              src="https://www.youtube-nocookie.com/embed/RDKe9ODRt4E"
-              width="100%"
-              height="100%"
-              style={{ borderRadius: 8 }}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            <YouTubeIframe />
           </Box>
           <Box maxW={["100%", "30%"]}>
             <Heading size="lg">Ajude sem tirar 1 real do bolso</Heading>
