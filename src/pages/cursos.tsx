@@ -87,17 +87,24 @@ export default function Courses() {
       </MotionHeading>
       <Grid
         as="main"
-        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(2, 1fr)",
+          "repeat(3, 1fr)",
+        ]}
         gap={12}
         my={8}
+        px={6}
         w="100%"
         justifyItems="center"
       >
         {courses.map((course) => (
           <Card
+            key={course.title}
             title={course.title}
             description={course.description}
-            key={course.title}
+            imageUrl="https://www.cacv.org.br/assets/img/informatica.jpg"
           />
         ))}
       </Grid>
