@@ -1,6 +1,6 @@
 import Image from "next/image";
 import NextLink from "next/link";
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Flex, Spacer, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { BsFacebook, BsWhatsapp, BsEnvelope } from "react-icons/bs";
 import { useRouter } from "next/router";
@@ -30,6 +30,9 @@ export default function Navbar() {
       alignItems="center"
       px={6}
       position="fixed"
+      zIndex={99}
+      bg={useColorModeValue("#ffffff40", "#1a202c40")}
+      css={{ backdropFilter: "blur(2px)" }}
     >
       {/* <Image src={} /> alt="Cacv logo" */}
       <span>Logo</span>
