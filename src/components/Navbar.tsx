@@ -6,6 +6,8 @@ import {
   IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
+  MenuGroup,
   MenuItem,
   MenuList,
   Stack,
@@ -91,7 +93,7 @@ export default function Navbar() {
         ))}
       </Stack>
       <Box ml={2} display={{ base: "inline-block", md: "none" }}>
-        <Menu isLazy>
+        <Menu isLazy autoSelect={false}>
           <MenuButton
             as={IconButton}
             aria-label="Options"
@@ -99,17 +101,27 @@ export default function Navbar() {
             variant="outline"
           />
           <MenuList>
-            {navLinks.map((link) => (
-              <NextLink key={link.href} href={link.href} passHref>
-                <MenuItem as={Link}>{link.name}</MenuItem>
-              </NextLink>
-            ))}
-            {socialMediaLinks.map((link) => (
-              <MenuItem as={Link} key={link.href} href={link.href}>
-                {link.icon}
-                <Text ml={1}>{link.text}</Text>
-              </MenuItem>
-            ))}
+            <MenuGroup title="Pages">
+              {navLinks.map((link) => (
+                <NextLink key={link.href} href={link.href} passHref>
+                  <MenuItem as={Link}>{link.name}</MenuItem>
+                </NextLink>
+              ))}
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup title="Social Media">
+              {socialMediaLinks.map((link) => (
+                <MenuItem
+                  as={Link}
+                  key={link.href}
+                  href={link.href}
+                  _hover={{ textDecor: "none" }}
+                >
+                  {link.icon}
+                  <Text ml={1}>{link.text}</Text>
+                </MenuItem>
+              ))}
+            </MenuGroup>
           </MenuList>
         </Menu>
       </Box>
