@@ -1,6 +1,6 @@
 import Card from "components/Card";
 import Layout from "components/Layout";
-import { Box, Grid, Heading, HeadingProps } from "@chakra-ui/react";
+import { Grid, Heading, HeadingProps } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 
 export default function Courses() {
@@ -57,8 +57,8 @@ export default function Courses() {
   controls.start("visible");
 
   const headingVariants = {
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0 } },
-    hidden: { y: 10, opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.8, delay: 0 } },
+    hidden: { opacity: 0 },
   };
 
   return (

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Box, BoxProps, Heading, Text } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const MotionSection = motion<BoxProps>(Box);
 
@@ -10,8 +11,11 @@ type CardProps = {
 };
 
 export default function Card({ title, description }: CardProps) {
+  const [ref, inView] = useInView();
   const controls = useAnimation();
-  controls.start("visible");
+  if (inView) {
+    controls.start("visible");
+  }
 
   const sectionVariants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.5 } },
@@ -28,6 +32,7 @@ export default function Card({ title, description }: CardProps) {
       animate={controls}
       initial="hidden"
       variants={sectionVariants}
+      ref={ref}
     >
       <Image
         src="/informatica.jpg"
