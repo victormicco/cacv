@@ -1,11 +1,25 @@
-import { theme, Theme } from "@chakra-ui/react";
+import { extendTheme, Theme, ThemeConfig } from "@chakra-ui/react";
 
-const newTheme: Theme = {
-  ...theme,
-  config: {
-    initialColorMode: "dark",
-    useSystemColorMode: true,
-  },
+const config: ThemeConfig = {
+  initialColorMode: "dark",
+  useSystemColorMode: true,
 };
 
-export default newTheme;
+const theme = extendTheme({
+  config,
+  styles: {
+    global: {
+      "::-webkit-scrollbar": {
+        width: "18px",
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: "#7f7f7f",
+        border: "6px solid rgba(0, 0, 0, 0)",
+        "-webkit-border-radius": "100px",
+        backgroundClip: "padding-box",
+      },
+    },
+  },
+});
+
+export default theme;
