@@ -2,8 +2,8 @@ import { Box, Flex, Heading, Text, Link } from "@chakra-ui/react";
 import Image from "next/image";
 import NextLink from "next/link";
 import Layout from "./../components/Layout";
-import loadable from "@loadable/component";
-const YouTubeIframe = loadable(() => import("components/Iframe"));
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 export default function Home() {
   return (
@@ -135,7 +135,7 @@ export default function Home() {
           justifyContent="center"
         >
           <Box w="100%" maxW="495.04px" height="278.46px">
-            <YouTubeIframe />
+            <LiteYouTubeEmbed id="RDKe9ODRt4E" title="Nota fiscal paulista" />
           </Box>
           <Box maxW={["100%", "30%"]}>
             <Heading size="lg">Ajude sem tirar 1 real do bolso</Heading>
