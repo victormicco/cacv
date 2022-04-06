@@ -3,6 +3,8 @@ import Section from "components/Section";
 import Image from "next/image";
 import NextLink from "next/link";
 import Layout from "./../components/Layout";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 export default function Home() {
   return (
@@ -30,6 +32,7 @@ export default function Home() {
           quality={100}
           style={{ borderRadius: 8 }}
           alt="Jovens"
+          priority
         />
       </Flex>
       <Flex
@@ -128,17 +131,7 @@ export default function Home() {
             </Text>
           </Box>
           <Box w="100%" maxW="495.04px" height="278.46px">
-            <iframe
-              loading="lazy"
-              src="https://www.youtube-nocookie.com/embed/RDKe9ODRt4E"
-              width="100%"
-              height="100%"
-              style={{ borderRadius: 8 }}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            <LiteYouTubeEmbed id="RDKe9ODRt4E" title="Nota fiscal paulista" />
           </Box>
         </Flex>
       </Flex>
