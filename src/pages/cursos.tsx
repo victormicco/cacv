@@ -1,18 +1,15 @@
 import Card from "components/Card";
 import Layout from "components/Layout";
 import { Grid, Heading, HeadingProps } from "@chakra-ui/react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
 import { CoursesDocument, useCoursesQuery } from "generated/graphql";
 
 export default function Courses() {
   const [{ data }] = useCoursesQuery();
-  console.log(data);
 
   const MotionHeading = motion<HeadingProps>(Heading);
-  const controls = useAnimation();
-  controls.start("visible");
 
   const headingVariants = {
     visible: { opacity: 1, transition: { duration: 0.8, delay: 0 } },
@@ -26,9 +23,9 @@ export default function Courses() {
         size="lg"
         fontWeight="semibold"
         px={6}
-        animate={controls}
-        variants={headingVariants}
         initial="hidden"
+        animate="visible"
+        variants={headingVariants}
       >
         Nossos cursos
       </MotionHeading>
@@ -37,9 +34,9 @@ export default function Courses() {
         size="sm"
         fontWeight="normal"
         px={6}
-        animate={controls}
-        variants={headingVariants}
         initial="hidden"
+        animate="visible"
+        variants={headingVariants}
       >
         Abaixo, está listado todos os nossos cursos disponíveis
       </MotionHeading>
