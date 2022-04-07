@@ -53,8 +53,18 @@ export default function Navbar() {
       bg={useColorModeValue("#ffffff40", "#1a202c40")}
       css={{ backdropFilter: "blur(2px)" }}
     >
-      {/* <Image src={} /> alt="Cacv logo" */}
-      <span>Logo</span>
+      <NextLink href="/">
+        <a>
+          <Image
+            src="/icon.png"
+            alt="Cacv logo"
+            width={48}
+            height={48}
+            quality={100}
+            priority
+          />
+        </a>
+      </NextLink>
       <Stack
         as="ul"
         listStyleType="none"
