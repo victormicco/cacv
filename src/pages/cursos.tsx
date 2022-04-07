@@ -2,55 +2,13 @@ import Card from "components/Card";
 import Layout from "components/Layout";
 import { Grid, Heading, HeadingProps } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
+import { GetStaticProps } from "next";
+import { client, ssrCache } from "lib/urql";
+import { CoursesDocument, useCoursesQuery } from "generated/graphql";
 
 export default function Courses() {
-  const courses = [
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-    {
-      title: "Informática",
-      description:
-        "Nosso curso destina-se a tornar uma pessoa funcional na questão da informática. Ministrando informações básicas e operacionais de hardware e software. inclui o ensinamento para tornar o aluno um usuário operacional do Windows e Pacote Office.",
-    },
-  ];
+  const [{ data }] = useCoursesQuery();
+  console.log(data);
 
   const MotionHeading = motion<HeadingProps>(Heading);
   const controls = useAnimation();
@@ -99,15 +57,27 @@ export default function Courses() {
         w="100%"
         justifyItems="center"
       >
-        {courses.map((course) => (
+        {data?.courses.map((course) => (
           <Card
             key={course.title}
             title={course.title}
             description={course.description}
-            imageUrl="https://www.cacv.org.br/assets/img/informatica.jpg"
+            imageUrl={course.image?.url}
           />
         ))}
       </Grid>
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  await client.query(CoursesDocument).toPromise();
+
+  return {
+    props: {
+      urqlState: ssrCache.extractData(),
+    },
+
+    revalidate: 1 * 60, // 1 minute
+  };
+};

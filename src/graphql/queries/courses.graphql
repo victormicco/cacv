@@ -1,0 +1,9 @@
+query Courses {
+  courses {
+    title
+    description
+    image {
+      url(transformation: { image: { resize: { width: 286 } } })
+    }
+  }
+}
