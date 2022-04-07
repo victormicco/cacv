@@ -32,7 +32,11 @@ const socialMediaLinks = [
     href: "https://www.facebook.com/cacv.cultivandoamor",
     text: "Facebook",
   },
-  { icon: <BsWhatsapp />, href: "https://api.whatsapp.com", text: "Whatsapp" },
+  {
+    icon: <BsWhatsapp />,
+    href: "https://api.whatsapp.com/send/?phone=5511975407932&text&app_absent=0",
+    text: "Whatsapp",
+  },
   { icon: <BsEnvelope />, href: "mailto:cacv@cacv.org.br", text: "E-mail" },
 ];
 
