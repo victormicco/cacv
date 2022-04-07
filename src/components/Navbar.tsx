@@ -59,7 +59,7 @@ export default function Navbar() {
             src="/icon.png"
             alt="Cacv logo"
             width={48}
-            height={48}
+            height={43}
             quality={100}
             priority
           />
