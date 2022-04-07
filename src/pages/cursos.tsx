@@ -62,7 +62,7 @@ export default function Courses() {
   };
 
   return (
-    <Layout title="Cursos">
+    <Layout seo={{ title: "Cursos", desc: "CACV - Cursos" }}>
       <MotionHeading
         as="h1"
         size="lg"

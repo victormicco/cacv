@@ -4,16 +4,22 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Head from "next/head";
 
-type LayoutProps = {
+type SEO = {
   title: string;
+  desc: string;
+};
+
+type LayoutProps = {
+  seo: SEO;
   children: ReactNode;
 };
 
-export default function Layout({ children, title }: LayoutProps) {
+export default function Layout({ children, seo }: LayoutProps) {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.desc} />
       </Head>
       <Navbar />
       <Box mt="68px">{children}</Box>

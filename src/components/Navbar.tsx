@@ -86,7 +86,12 @@ export default function Navbar() {
       >
         {socialMediaLinks.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} key={link.href} isExternal>
+            <Link
+              href={link.href}
+              key={link.href}
+              aria-label={link.text}
+              isExternal
+            >
               {link.icon}
             </Link>
           </li>
@@ -115,6 +120,7 @@ export default function Navbar() {
                   as={Link}
                   key={link.href}
                   href={link.href}
+                  aria-label={link.text}
                   _hover={{ textDecor: "none" }}
                 >
                   {link.icon}

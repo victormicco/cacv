@@ -8,7 +8,7 @@ import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 export default function Home() {
   return (
-    <Layout title="Home">
+    <Layout seo={{ title: "Home", desc: "CACV - Home" }}>
       <Flex
         as="main"
         flexDir="column"
