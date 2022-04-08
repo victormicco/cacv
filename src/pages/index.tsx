@@ -5,6 +5,7 @@ import NextLink from "next/link";
 import Layout from "./../components/Layout";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+import Form from "components/Form";
 
 export default function Home() {
   return (
@@ -145,6 +146,7 @@ export default function Home() {
         imageUrl="https://www.cacv.org.br/assets/img/doacao.jpg"
         imageAltText="Doação"
       />
+      <Form />
     </Layout>
   );
 }
