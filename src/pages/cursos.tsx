@@ -2,7 +2,7 @@ import Card from "components/Card";
 import Layout from "components/Layout";
 import { Grid, Heading, HeadingProps } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
 import { CoursesDocument, useCoursesQuery } from "generated/graphql";
 
@@ -67,14 +67,12 @@ export default function Courses() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   await client.query(CoursesDocument).toPromise();
 
   return {
     props: {
       urqlState: ssrCache.extractData(),
     },
-
-    revalidate: 1, // 1 second
   };
 };
