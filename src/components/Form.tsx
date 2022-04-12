@@ -26,14 +26,16 @@ export default function Form() {
     <Flex
       as="section"
       flexDir="column"
+      justifyContent="center"
       alignItems="center"
       w="100%"
+      minH="70vh"
+      bgColor="gray.900"
       gap={2}
       px={6}
-      my={12}
     >
-      <Heading>Nos envie uma mensagem:</Heading>
-      <Text my={1}>Em caso de dúvidas ou sugestões.</Text>
+      <Heading mb={[2, 0]}>Nos envie uma mensagem</Heading>
+      <Text my={1}>Em caso de dúvidas ou sugestões</Text>
       <Flex
         as="form"
         onSubmit={handleSubmit}
@@ -66,7 +68,13 @@ export default function Form() {
             </InputLeftElement>
             <Textarea resize="none" placeholder="Mensagem" pl={10} pr={4} />
           </InputGroup>
-          <Button type="submit" py={6} colorScheme="blue">
+          <Button
+            type="submit"
+            py={6}
+            bgColor="blue.400"
+            color="#fff"
+            _hover={{ bgColor: "blue.500" }}
+          >
             Enviar
           </Button>
         </FormControl>

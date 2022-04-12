@@ -24,11 +24,13 @@ export default function Section({
       <Flex
         as="section"
         flexDir="column"
+        justifyContent="center"
         alignItems="center"
         w="100%"
+        minH="65vh"
+        bgColor="blue.200"
         gap={2}
         px={6}
-        my={12}
       >
         <Flex
           flexDir={["column", "row"]}
@@ -57,11 +59,13 @@ export default function Section({
       <Flex
         as="section"
         flexDir="column"
+        justifyContent="center"
         alignItems="center"
         w="100%"
+        minH="65vh"
         gap={2}
         px={6}
-        my={12}
+        bgColor="blue.200"
       >
         <Flex
           flexDir={["column", "row"]}

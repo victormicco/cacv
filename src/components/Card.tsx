@@ -1,5 +1,11 @@
 import Image from "next/image";
-import { Box, BoxProps, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  BoxProps,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -27,7 +33,8 @@ export default function Card({ title, description, imageUrl }: CardProps) {
     <MotionSection
       as="section"
       w="286px"
-      bgColor="gray.600"
+      bgColor={useColorModeValue("gray.200", "gray.600")}
+      color={useColorModeValue("gray.900", "gray.100")}
       borderRadius="3xl"
       p={5}
       animate={controls}

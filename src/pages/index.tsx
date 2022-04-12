@@ -39,12 +39,15 @@ export default function Home() {
       <Flex
         as="section"
         flexDir="column"
+        justifyContent="center"
         alignItems="center"
         w="100%"
+        minH="60vh"
         gap={2}
         px={6}
+        bgColor="blue.300"
       >
-        <Heading as="h1" alignSelf={["flex-start", "center"]} mb={6}>
+        <Heading as="h1" alignSelf={["flex-start", "center"]} pb={[6, 32]}>
           Sobre nós
         </Heading>
         <Flex
@@ -87,6 +90,7 @@ export default function Home() {
               px={4}
               py={3}
               bgColor="blue.300"
+              color="#fff"
               borderRadius={6}
               display="inline-block"
               _hover={{
@@ -103,11 +107,13 @@ export default function Home() {
       <Flex
         as="section"
         flexDir="column"
+        justifyContent="center"
         alignItems="center"
+        minH="65vh"
         w="100%"
+        bgColor="blue.300"
         gap={2}
         px={6}
-        my={12}
       >
         <Flex
           flexDir={["column", "row"]}
@@ -131,7 +137,7 @@ export default function Home() {
               </Link>
             </Text>
           </Box>
-          <Box w="100%" maxW="495.04px" height="278.46px">
+          <Box w="100%" maxW="495.04px" h="100%" maxH="278.46px">
             <LiteYouTubeEmbed id="RDKe9ODRt4E" title="Nota fiscal paulista" />
           </Box>
         </Flex>
