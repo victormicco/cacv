@@ -65,7 +65,7 @@ export default function Section({
         minH="65vh"
         gap={2}
         px={6}
-        bgColor="blue.200"
+        bgColor="green.400"
       >
         <Flex
           flexDir={["column", "row"]}
