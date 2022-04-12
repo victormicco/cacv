@@ -42,7 +42,7 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         w="100%"
-        minH="60vh"
+        minH={["70vh", "60vh"]}
         gap={2}
         px={6}
         bgColor="blue.300"
@@ -53,7 +53,7 @@ export default function Home() {
         <Flex
           flexDir={["column", "row"]}
           w="80vw"
-          gap={4}
+          gap={12}
           justifyContent="center"
         >
           <Box maxW={["100%", "30%"]}>
@@ -118,7 +118,7 @@ export default function Home() {
         <Flex
           flexDir={["column", "row"]}
           w="80vw"
-          gap={4}
+          gap={12}
           justifyContent="center"
         >
           <Box maxW={["100%", "30%"]}>

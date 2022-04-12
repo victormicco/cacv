@@ -35,7 +35,7 @@ export default function Section({
         <Flex
           flexDir={["column", "row"]}
           w="80vw"
-          gap={4}
+          gap={12}
           justifyContent="center"
         >
           <Box maxW={["100%", "30%"]}>
@@ -70,7 +70,7 @@ export default function Section({
         <Flex
           flexDir={["column", "row"]}
           w="80vw"
-          gap={4}
+          gap={12}
           justifyContent="center"
         >
           <Image
