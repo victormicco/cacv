@@ -27,7 +27,7 @@ export default function Home() {
           ter uma profissão.
         </Text>
         <Image
-          src="https://www.cacv.org.br/assets/img/img7.jpeg"
+          src="/img.webp"
           width={1040}
           height={585}
           quality={100}
@@ -67,7 +67,7 @@ export default function Home() {
             </Text>
           </Box>
           <Image
-            src="https://www.cacv.org.br/assets/img/rapazeada.jpg"
+            src="/img2.webp"
             width={495.04}
             height={278.46}
             quality={100}
@@ -82,7 +82,7 @@ export default function Home() {
         description="Oferecemos diversos cursos totalmente grátis, dentre eles são:
               Elétrica, Autocad, Hardware, Informática, Dança, Costureira,
               Inglês, Esperanto e Japonês."
-        imageUrl="https://www.cacv.org.br/assets/img/eletrica.jpg"
+        imageUrl="/img3.webp"
         imageAltText="Jovens fazendo curso"
         button={
           <NextLink href="/cursos" passHref>
@@ -149,7 +149,7 @@ export default function Home() {
         por dia, comprar materiais necessários dos cursos, reformar o
         espaço, entregar cestas básicas e fazer passeios e festas para a
         população local."
-        imageUrl="https://www.cacv.org.br/assets/img/doacao.jpg"
+        imageUrl="/img4.webp"
         imageAltText="Doação"
       />
       <Form />
