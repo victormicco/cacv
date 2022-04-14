@@ -45,7 +45,7 @@ export default function Home() {
         minH={["70vh", "60vh"]}
         gap={2}
         px={6}
-        bgColor="blue.300"
+        bgColor="blue.400"
       >
         <Heading as="h1" alignSelf={["flex-start", "center"]} pb={[6, 32]}>
           Sobre nós
@@ -89,14 +89,14 @@ export default function Home() {
             <Link
               px={4}
               py={3}
-              bgColor="blue.300"
+              bgColor="blue.400"
               color="#fff"
               borderRadius={6}
               display="inline-block"
               _hover={{
-                bgColor: "blue.400",
+                bgColor: "blue.500",
                 textDecor: "none",
-                transition: "0.2s",
+                transition: "0.4s",
               }}
             >
               Ver todos os cursos
