@@ -53,6 +53,7 @@ export type Asset = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   imageCourse: Array<Course>;
+  imageGallery: Array<Gallery>;
   imageProject: Array<Project>;
   /** System Locale field */
   locale: Locale;
@@ -118,6 +119,19 @@ export type AssetImageCourseArgs = {
   orderBy?: InputMaybe<CourseOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CourseWhereInput>;
+};
+
+
+/** Asset system model */
+export type AssetImageGalleryArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<GalleryOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GalleryWhereInput>;
 };
 
 
@@ -205,6 +219,7 @@ export type AssetCreateInput = {
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
   imageCourse?: InputMaybe<CourseCreateManyInlineInput>;
+  imageGallery?: InputMaybe<GalleryCreateManyInlineInput>;
   imageProject?: InputMaybe<ProjectCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
@@ -307,6 +322,9 @@ export type AssetManyWhereInput = {
   imageCourse_every?: InputMaybe<CourseWhereInput>;
   imageCourse_none?: InputMaybe<CourseWhereInput>;
   imageCourse_some?: InputMaybe<CourseWhereInput>;
+  imageGallery_every?: InputMaybe<GalleryWhereInput>;
+  imageGallery_none?: InputMaybe<GalleryWhereInput>;
+  imageGallery_some?: InputMaybe<GalleryWhereInput>;
   imageProject_every?: InputMaybe<ProjectWhereInput>;
   imageProject_none?: InputMaybe<ProjectWhereInput>;
   imageProject_some?: InputMaybe<ProjectWhereInput>;
@@ -383,6 +401,7 @@ export type AssetUpdateInput = {
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
   imageCourse?: InputMaybe<CourseUpdateManyInlineInput>;
+  imageGallery?: InputMaybe<GalleryUpdateManyInlineInput>;
   imageProject?: InputMaybe<ProjectUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
@@ -610,6 +629,9 @@ export type AssetWhereInput = {
   imageCourse_every?: InputMaybe<CourseWhereInput>;
   imageCourse_none?: InputMaybe<CourseWhereInput>;
   imageCourse_some?: InputMaybe<CourseWhereInput>;
+  imageGallery_every?: InputMaybe<GalleryWhereInput>;
+  imageGallery_none?: InputMaybe<GalleryWhereInput>;
+  imageGallery_some?: InputMaybe<GalleryWhereInput>;
   imageProject_every?: InputMaybe<ProjectWhereInput>;
   imageProject_none?: InputMaybe<ProjectWhereInput>;
   imageProject_some?: InputMaybe<ProjectWhereInput>;
@@ -1256,6 +1278,418 @@ export type DocumentVersion = {
   stage: Stage;
 };
 
+export type Gallery = Node & {
+  __typename?: 'Gallery';
+  alt: Scalars['String'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Gallery>;
+  /** List of Gallery versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  image: Asset;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type GalleryCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type GalleryDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type GalleryHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type GalleryImageArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type GalleryPublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type GalleryScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type GalleryUpdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type GalleryConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: GalleryWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type GalleryConnection = {
+  __typename?: 'GalleryConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<GalleryEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type GalleryCreateInput = {
+  alt: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  image: AssetCreateOneInlineInput;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type GalleryCreateManyInlineInput = {
+  /** Connect multiple existing Gallery documents */
+  connect?: InputMaybe<Array<GalleryWhereUniqueInput>>;
+  /** Create and connect multiple existing Gallery documents */
+  create?: InputMaybe<Array<GalleryCreateInput>>;
+};
+
+export type GalleryCreateOneInlineInput = {
+  /** Connect one existing Gallery document */
+  connect?: InputMaybe<GalleryWhereUniqueInput>;
+  /** Create and connect one Gallery document */
+  create?: InputMaybe<GalleryCreateInput>;
+};
+
+/** An edge in a connection. */
+export type GalleryEdge = {
+  __typename?: 'GalleryEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Gallery;
+};
+
+/** Identifies documents */
+export type GalleryManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  alt?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  alt_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  alt_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  alt_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  alt_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  alt_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  alt_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  alt_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  alt_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  alt_starts_with?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<AssetWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum GalleryOrderByInput {
+  AltAsc = 'alt_ASC',
+  AltDesc = 'alt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type GalleryUpdateInput = {
+  alt?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
+};
+
+export type GalleryUpdateManyInlineInput = {
+  /** Connect multiple existing Gallery documents */
+  connect?: InputMaybe<Array<GalleryConnectInput>>;
+  /** Create and connect multiple Gallery documents */
+  create?: InputMaybe<Array<GalleryCreateInput>>;
+  /** Delete multiple Gallery documents */
+  delete?: InputMaybe<Array<GalleryWhereUniqueInput>>;
+  /** Disconnect multiple Gallery documents */
+  disconnect?: InputMaybe<Array<GalleryWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Gallery documents */
+  set?: InputMaybe<Array<GalleryWhereUniqueInput>>;
+  /** Update multiple Gallery documents */
+  update?: InputMaybe<Array<GalleryUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Gallery documents */
+  upsert?: InputMaybe<Array<GalleryUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type GalleryUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type GalleryUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: GalleryUpdateManyInput;
+  /** Document search */
+  where: GalleryWhereInput;
+};
+
+export type GalleryUpdateOneInlineInput = {
+  /** Connect existing Gallery document */
+  connect?: InputMaybe<GalleryWhereUniqueInput>;
+  /** Create and connect one Gallery document */
+  create?: InputMaybe<GalleryCreateInput>;
+  /** Delete currently connected Gallery document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Gallery document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Gallery document */
+  update?: InputMaybe<GalleryUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Gallery document */
+  upsert?: InputMaybe<GalleryUpsertWithNestedWhereUniqueInput>;
+};
+
+export type GalleryUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: GalleryUpdateInput;
+  /** Unique document search */
+  where: GalleryWhereUniqueInput;
+};
+
+export type GalleryUpsertInput = {
+  /** Create document if it didn't exist */
+  create: GalleryCreateInput;
+  /** Update document if it exists */
+  update: GalleryUpdateInput;
+};
+
+export type GalleryUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: GalleryUpsertInput;
+  /** Unique document search */
+  where: GalleryWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type GalleryWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<GalleryWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  alt?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  alt_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  alt_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  alt_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  alt_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  alt_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  alt_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  alt_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  alt_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  alt_starts_with?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<AssetWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** References Gallery record uniquely */
+export type GalleryWhereUniqueInput = {
+  alt?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export enum ImageFit {
   /** Resizes the image to fit within the specified parameters without distorting, cropping, or changing the aspect ratio. */
   Clip = 'clip',
@@ -1317,6 +1751,8 @@ export type Mutation = {
   createAsset?: Maybe<Asset>;
   /** Create one course */
   createCourse?: Maybe<Course>;
+  /** Create one gallery */
+  createGallery?: Maybe<Gallery>;
   /** Create one project */
   createProject?: Maybe<Project>;
   /** Create one scheduledRelease */
@@ -1325,6 +1761,8 @@ export type Mutation = {
   deleteAsset?: Maybe<Asset>;
   /** Delete one course from _all_ existing stages. Returns deleted document. */
   deleteCourse?: Maybe<Course>;
+  /** Delete one gallery from _all_ existing stages. Returns deleted document. */
+  deleteGallery?: Maybe<Gallery>;
   /**
    * Delete many Asset documents
    * @deprecated Please use the new paginated many mutation (deleteManyAssetsConnection)
@@ -1339,6 +1777,13 @@ export type Mutation = {
   deleteManyCourses: BatchPayload;
   /** Delete many Course documents, return deleted documents */
   deleteManyCoursesConnection: CourseConnection;
+  /**
+   * Delete many Gallery documents
+   * @deprecated Please use the new paginated many mutation (deleteManyGalleriesConnection)
+   */
+  deleteManyGalleries: BatchPayload;
+  /** Delete many Gallery documents, return deleted documents */
+  deleteManyGalleriesConnection: GalleryConnection;
   /**
    * Delete many Project documents
    * @deprecated Please use the new paginated many mutation (deleteManyProjectsConnection)
@@ -1356,6 +1801,8 @@ export type Mutation = {
   publishAsset?: Maybe<Asset>;
   /** Publish one course */
   publishCourse?: Maybe<Course>;
+  /** Publish one gallery */
+  publishGallery?: Maybe<Gallery>;
   /**
    * Publish many Asset documents
    * @deprecated Please use the new paginated many mutation (publishManyAssetsConnection)
@@ -1371,6 +1818,13 @@ export type Mutation = {
   /** Publish many Course documents */
   publishManyCoursesConnection: CourseConnection;
   /**
+   * Publish many Gallery documents
+   * @deprecated Please use the new paginated many mutation (publishManyGalleriesConnection)
+   */
+  publishManyGalleries: BatchPayload;
+  /** Publish many Gallery documents */
+  publishManyGalleriesConnection: GalleryConnection;
+  /**
    * Publish many Project documents
    * @deprecated Please use the new paginated many mutation (publishManyProjectsConnection)
    */
@@ -1383,18 +1837,24 @@ export type Mutation = {
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one course */
   schedulePublishCourse?: Maybe<Course>;
+  /** Schedule to publish one gallery */
+  schedulePublishGallery?: Maybe<Gallery>;
   /** Schedule to publish one project */
   schedulePublishProject?: Maybe<Project>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one course from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishCourse?: Maybe<Course>;
+  /** Unpublish one gallery from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishGallery?: Maybe<Gallery>;
   /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishProject?: Maybe<Project>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one course from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishCourse?: Maybe<Course>;
+  /** Unpublish one gallery from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishGallery?: Maybe<Gallery>;
   /**
    * Unpublish many Asset documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
@@ -1410,6 +1870,13 @@ export type Mutation = {
   /** Find many Course documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyCoursesConnection: CourseConnection;
   /**
+   * Unpublish many Gallery documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyGalleriesConnection)
+   */
+  unpublishManyGalleries: BatchPayload;
+  /** Find many Gallery documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyGalleriesConnection: GalleryConnection;
+  /**
    * Unpublish many Project documents
    * @deprecated Please use the new paginated many mutation (unpublishManyProjectsConnection)
    */
@@ -1422,6 +1889,8 @@ export type Mutation = {
   updateAsset?: Maybe<Asset>;
   /** Update one course */
   updateCourse?: Maybe<Course>;
+  /** Update one gallery */
+  updateGallery?: Maybe<Gallery>;
   /**
    * Update many assets
    * @deprecated Please use the new paginated many mutation (updateManyAssetsConnection)
@@ -1437,6 +1906,13 @@ export type Mutation = {
   /** Update many Course documents */
   updateManyCoursesConnection: CourseConnection;
   /**
+   * Update many galleries
+   * @deprecated Please use the new paginated many mutation (updateManyGalleriesConnection)
+   */
+  updateManyGalleries: BatchPayload;
+  /** Update many Gallery documents */
+  updateManyGalleriesConnection: GalleryConnection;
+  /**
    * Update many projects
    * @deprecated Please use the new paginated many mutation (updateManyProjectsConnection)
    */
@@ -1451,6 +1927,8 @@ export type Mutation = {
   upsertAsset?: Maybe<Asset>;
   /** Upsert one course */
   upsertCourse?: Maybe<Course>;
+  /** Upsert one gallery */
+  upsertGallery?: Maybe<Gallery>;
   /** Upsert one project */
   upsertProject?: Maybe<Project>;
 };
@@ -1463,6 +1941,11 @@ export type MutationCreateAssetArgs = {
 
 export type MutationCreateCourseArgs = {
   data: CourseCreateInput;
+};
+
+
+export type MutationCreateGalleryArgs = {
+  data: GalleryCreateInput;
 };
 
 
@@ -1483,6 +1966,11 @@ export type MutationDeleteAssetArgs = {
 
 export type MutationDeleteCourseArgs = {
   where: CourseWhereUniqueInput;
+};
+
+
+export type MutationDeleteGalleryArgs = {
+  where: GalleryWhereUniqueInput;
 };
 
 
@@ -1513,6 +2001,21 @@ export type MutationDeleteManyCoursesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CourseManyWhereInput>;
+};
+
+
+export type MutationDeleteManyGalleriesArgs = {
+  where?: InputMaybe<GalleryManyWhereInput>;
+};
+
+
+export type MutationDeleteManyGalleriesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GalleryManyWhereInput>;
 };
 
 
@@ -1561,6 +2064,12 @@ export type MutationPublishCourseArgs = {
 };
 
 
+export type MutationPublishGalleryArgs = {
+  to?: Array<Stage>;
+  where: GalleryWhereUniqueInput;
+};
+
+
 export type MutationPublishManyAssetsArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -1600,6 +2109,24 @@ export type MutationPublishManyCoursesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   to?: Array<Stage>;
   where?: InputMaybe<CourseManyWhereInput>;
+};
+
+
+export type MutationPublishManyGalleriesArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<GalleryManyWhereInput>;
+};
+
+
+export type MutationPublishManyGalleriesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<GalleryManyWhereInput>;
 };
 
 
@@ -1646,6 +2173,14 @@ export type MutationSchedulePublishCourseArgs = {
 };
 
 
+export type MutationSchedulePublishGalleryArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: GalleryWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishProjectArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -1672,6 +2207,14 @@ export type MutationScheduleUnpublishCourseArgs = {
 };
 
 
+export type MutationScheduleUnpublishGalleryArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: GalleryWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishProjectArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']>;
@@ -1691,6 +2234,12 @@ export type MutationUnpublishAssetArgs = {
 export type MutationUnpublishCourseArgs = {
   from?: Array<Stage>;
   where: CourseWhereUniqueInput;
+};
+
+
+export type MutationUnpublishGalleryArgs = {
+  from?: Array<Stage>;
+  where: GalleryWhereUniqueInput;
 };
 
 
@@ -1734,6 +2283,24 @@ export type MutationUnpublishManyCoursesConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyGalleriesArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<GalleryManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyGalleriesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<GalleryManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyProjectsArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<ProjectManyWhereInput>;
@@ -1770,6 +2337,12 @@ export type MutationUpdateCourseArgs = {
 };
 
 
+export type MutationUpdateGalleryArgs = {
+  data: GalleryUpdateInput;
+  where: GalleryWhereUniqueInput;
+};
+
+
 export type MutationUpdateManyAssetsArgs = {
   data: AssetUpdateManyInput;
   where?: InputMaybe<AssetManyWhereInput>;
@@ -1801,6 +2374,23 @@ export type MutationUpdateManyCoursesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CourseManyWhereInput>;
+};
+
+
+export type MutationUpdateManyGalleriesArgs = {
+  data: GalleryUpdateManyInput;
+  where?: InputMaybe<GalleryManyWhereInput>;
+};
+
+
+export type MutationUpdateManyGalleriesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: GalleryUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GalleryManyWhereInput>;
 };
 
 
@@ -1842,6 +2432,12 @@ export type MutationUpsertAssetArgs = {
 export type MutationUpsertCourseArgs = {
   upsert: CourseUpsertInput;
   where: CourseWhereUniqueInput;
+};
+
+
+export type MutationUpsertGalleryArgs = {
+  upsert: GalleryUpsertInput;
+  where: GalleryWhereUniqueInput;
 };
 
 
@@ -2355,6 +2951,14 @@ export type Query = {
   courses: Array<Course>;
   /** Retrieve multiple courses using the Relay connection interface */
   coursesConnection: CourseConnection;
+  /** Retrieve multiple galleries */
+  galleries: Array<Gallery>;
+  /** Retrieve multiple galleries using the Relay connection interface */
+  galleriesConnection: GalleryConnection;
+  /** Retrieve a single gallery */
+  gallery?: Maybe<Gallery>;
+  /** Retrieve document version */
+  galleryVersion?: Maybe<DocumentVersion>;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
   /** Retrieve a single project */
@@ -2459,6 +3063,44 @@ export type QueryCoursesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
   where?: InputMaybe<CourseWhereInput>;
+};
+
+
+export type QueryGalleriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<GalleryOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<GalleryWhereInput>;
+};
+
+
+export type QueryGalleriesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<GalleryOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<GalleryWhereInput>;
+};
+
+
+export type QueryGalleryArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: GalleryWhereUniqueInput;
+};
+
+
+export type QueryGalleryVersionArgs = {
+  where: VersionWhereInput;
 };
 
 
@@ -2712,7 +3354,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Course | Project;
+export type ScheduledOperationAffectedDocument = Asset | Course | Gallery | Project;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4107,6 +4749,11 @@ export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', title: string, description: string, image: { __typename?: 'Asset', url: string } }> };
 
+export type GalleryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GalleryQuery = { __typename?: 'Query', galleries: Array<{ __typename?: 'Gallery', alt: string, image: { __typename?: 'Asset', url: string } }> };
+
 export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4127,6 +4774,20 @@ export const CoursesDocument = gql`
 
 export function useCoursesQuery(options?: Omit<Urql.UseQueryArgs<CoursesQueryVariables>, 'query'>) {
   return Urql.useQuery<CoursesQuery>({ query: CoursesDocument, ...options });
+};
+export const GalleryDocument = gql`
+    query Gallery {
+  galleries {
+    alt
+    image {
+      url(transformation: {image: {resize: {width: 286}}})
+    }
+  }
+}
+    `;
+
+export function useGalleryQuery(options?: Omit<Urql.UseQueryArgs<GalleryQueryVariables>, 'query'>) {
+  return Urql.useQuery<GalleryQuery>({ query: GalleryDocument, ...options });
 };
 export const ProjectsDocument = gql`
     query Projects {

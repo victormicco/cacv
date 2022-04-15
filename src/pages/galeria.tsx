@@ -4,11 +4,11 @@ import { Flex, Grid, Heading, HeadingProps } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
-import { CoursesDocument, useCoursesQuery } from "generated/graphql";
+import { GalleryDocument, useGalleryQuery } from "generated/graphql";
 import GalleryPhoto from "components/GalleryPhoto";
 
 export default function Gallery() {
-  const [{ data }] = useCoursesQuery();
+  const [{ data }] = useGalleryQuery();
 
   const MotionHeading = motion<HeadingProps>(Heading);
 
@@ -51,30 +51,14 @@ export default function Gallery() {
         alignItems="center"
         gridTemplateColumns="repeat(auto-fit, minmax(286px, 1fr))"
       >
-        {data?.courses.map((course) => (
-          <>
-            <GalleryPhoto
-              key={course.title}
-              src={course.image?.url}
-              alt={course.title}
-              width="286px"
-              height="214.5px"
-            />
-            <GalleryPhoto
-              key={course.title}
-              src={course.image?.url}
-              alt={course.title}
-              width="286px"
-              height="214.5px"
-            />
-            <GalleryPhoto
-              key={course.title}
-              src={course.image?.url}
-              alt={course.title}
-              width="286px"
-              height="214.5px"
-            />
-          </>
+        {data?.galleries.map((photo) => (
+          <GalleryPhoto
+            key={photo.alt}
+            src={photo.image?.url}
+            alt={photo.alt}
+            width="286px"
+            height="214.5px"
+          />
         ))}
       </Grid>
     </Layout>
@@ -82,7 +66,7 @@ export default function Gallery() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await client.query(CoursesDocument).toPromise();
+  await client.query(GalleryDocument).toPromise();
 
   return {
     props: {

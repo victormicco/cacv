@@ -1,0 +1,8 @@
+query Gallery {
+  galleries {
+    alt
+    image {
+      url(transformation: { image: { resize: { width: 286 } } })
+    }
+  }
+}
