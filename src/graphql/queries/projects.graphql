@@ -1,0 +1,9 @@
+query Projects {
+  projects {
+    title
+    description
+    image {
+      url(transformation: { image: { resize: { width: 286 } } })
+    }
+  }
+}

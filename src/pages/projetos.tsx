@@ -4,10 +4,10 @@ import { Grid, Heading, HeadingProps } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
-import { CoursesDocument, useCoursesQuery } from "generated/graphql";
+import { ProjectsDocument, useProjectsQuery } from "generated/graphql";
 
 export default function Projects() {
-  const [{ data }] = useCoursesQuery();
+  const [{ data }] = useProjectsQuery();
 
   const MotionHeading = motion<HeadingProps>(Heading);
 
@@ -54,12 +54,12 @@ export default function Projects() {
         w="100%"
         justifyItems="center"
       >
-        {data?.courses.map((course) => (
+        {data?.projects.map((project) => (
           <Card
-            key={course.title}
-            title={course.title}
-            description={course.description}
-            imageUrl={course.image?.url}
+            key={project.title}
+            title={project.title}
+            description={project.description}
+            imageUrl={project.image?.url}
           />
         ))}
       </Grid>
@@ -68,13 +68,13 @@ export default function Projects() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await client.query(CoursesDocument).toPromise();
+  await client.query(ProjectsDocument).toPromise();
 
   return {
     props: {
       urqlState: ssrCache.extractData(),
     },
 
-    revalidate: 1 * 60, // 1 minute
+    revalidate: 60 * 60 * 5, // 5 hours
   };
 };
