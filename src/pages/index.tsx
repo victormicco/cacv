@@ -6,11 +6,25 @@ import Layout from "./../components/Layout";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import Form from "components/Form";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const MotionContainer = motion(Flex);
+const variants = {
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+  hidden: { opacity: 0 },
+};
 
 export default function Home() {
+  const [ref, inView] = useInView();
+  const controls = useAnimation();
+  if (inView) {
+    controls.start("visible");
+  }
+
   return (
     <Layout seo={{ title: "Home", desc: "CACV - Home" }}>
-      <Flex
+      <MotionContainer
         as="main"
         flexDir="column"
         alignItems="center"
@@ -18,6 +32,9 @@ export default function Home() {
         gap={2}
         px={6}
         my={[12, 24]}
+        animate="visible"
+        initial="hidden"
+        variants={variants}
       >
         <Heading as="h1" alignSelf={["flex-start", "center"]}>
           Qual o nosso intuito?
@@ -35,8 +52,8 @@ export default function Home() {
           alt="Jovens"
           priority
         />
-      </Flex>
-      <Flex
+      </MotionContainer>
+      <MotionContainer
         as="section"
         flexDir="column"
         justifyContent="center"
@@ -46,6 +63,9 @@ export default function Home() {
         gap={2}
         px={6}
         bgColor="blue.400"
+        animate="visible"
+        initial="hidden"
+        variants={variants}
       >
         <Heading as="h1" alignSelf={["flex-start", "center"]} pb={[6, 32]}>
           Sobre nós
@@ -75,7 +95,7 @@ export default function Home() {
             alt="Jovens"
           />
         </Flex>
-      </Flex>
+      </MotionContainer>
       <Section
         position="right"
         title="Cursos com qualidade e 100% grátis"
@@ -104,7 +124,7 @@ export default function Home() {
           </NextLink>
         }
       />
-      <Flex
+      <MotionContainer
         as="section"
         flexDir="column"
         justifyContent="center"
@@ -114,6 +134,10 @@ export default function Home() {
         bgColor="blue.300"
         gap={2}
         px={6}
+        animate={controls}
+        initial="hidden"
+        variants={variants}
+        ref={ref}
       >
         <Flex
           flexDir={["column", "row"]}
@@ -141,7 +165,7 @@ export default function Home() {
             <LiteYouTubeEmbed id="RDKe9ODRt4E" title="Nota fiscal paulista" />
           </Box>
         </Flex>
-      </Flex>
+      </MotionContainer>
       <Section
         position="right"
         title="O que fazemos com as doações?"

@@ -1,6 +1,13 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import NextLink from "next/link";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const MotionContainer = motion(Flex);
+const variants = {
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+  hidden: { opacity: 0 },
+};
 
 type SectionProps = {
   title: string;
@@ -19,9 +26,15 @@ export default function Section({
   position,
   button,
 }: SectionProps) {
+  const [ref, inView] = useInView();
+  const controls = useAnimation();
+  if (inView) {
+    controls.start("visible");
+  }
+
   if (position === "left") {
     return (
-      <Flex
+      <MotionContainer
         as="section"
         flexDir="column"
         justifyContent="center"
@@ -31,6 +44,10 @@ export default function Section({
         bgColor="blue.200"
         gap={2}
         px={6}
+        animate={controls}
+        initial="hidden"
+        variants={variants}
+        ref={ref}
       >
         <Flex
           flexDir={["column", "row"]}
@@ -52,11 +69,11 @@ export default function Section({
             alt={imageAltText}
           />
         </Flex>
-      </Flex>
+      </MotionContainer>
     );
   } else {
     return (
-      <Flex
+      <MotionContainer
         as="section"
         flexDir="column"
         justifyContent="center"
@@ -66,6 +83,10 @@ export default function Section({
         gap={2}
         px={6}
         bgColor="#bf40bf"
+        animate={controls}
+        initial="hidden"
+        variants={variants}
+        ref={ref}
       >
         <Flex
           flexDir={["column", "row"]}
@@ -87,7 +108,7 @@ export default function Section({
             {button}
           </Box>
         </Flex>
-      </Flex>
+      </MotionContainer>
     );
   }
 }

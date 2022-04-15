@@ -21,7 +21,22 @@ import {
 import ReactInputMask from "react-input-mask";
 import validateForm from "services/validateForm";
 
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const MotionContainer = motion(Flex);
+const variants = {
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  hidden: { y: 10, opacity: 0 },
+};
+
 export default function Form() {
+  const [ref, inView] = useInView();
+  const controls = useAnimation();
+  if (inView) {
+    controls.start("visible");
+  }
+
   const toast = useToast({
     position: "top-right",
     duration: 4500,
@@ -78,7 +93,7 @@ export default function Form() {
   }
 
   return (
-    <Flex
+    <MotionContainer
       as="section"
       flexDir="column"
       justifyContent="center"
@@ -88,6 +103,10 @@ export default function Form() {
       bgColor="gray.900"
       gap={2}
       px={6}
+      animate={controls}
+      initial="hidden"
+      variants={variants}
+      ref={ref}
     >
       <Heading mb={[2, 0]}>Nos envie uma mensagem</Heading>
       <Text my={1}>Em caso de dúvidas ou sugestões</Text>
@@ -146,6 +165,6 @@ export default function Form() {
           </Button>
         </FormControl>
       </Flex>
-    </Flex>
+    </MotionContainer>
   );
 }
